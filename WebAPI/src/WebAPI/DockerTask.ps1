@@ -312,9 +312,9 @@ function WaitForUrl ([string]$uri) {
     $count = 0
 
     #Check if the site is available
-    while ($status -ne 200 -and $count -lt 120) {
+    while ($status -ne 200 -and $count -lt 15) {
         try {
-            Write-Host "Trying to connect to $uri ($count/120)"
+            Write-Host "Trying to connect to $uri ($count/15)"
             $response = Invoke-WebRequest -Uri $uri -Headers @{"Cache-Control"="no-cache";"Pragma"="no-cache"} -UseBasicParsing -Verbose:$false
             $status = [int]$response.StatusCode
         }
@@ -414,17 +414,12 @@ function GetComposeFilePath([string]$folder) {
     }
 }
 
-# load docker-machine env conf
-#& docker-machine env | Invoke-Expression
-
-Write-Verbose "Valeur de  Machine: '$Machine'"
-
 # Need the full path of the project for mapping
 $ProjectFolder = Resolve-Path $ProjectFolder
 
 if (![System.String]::IsNullOrWhiteSpace($Machine)) {
     $users = Split-Path $env:USERPROFILE -Parent
-	Write-Verbose "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+
     # Set the environment variables for the docker machine to connect to
     $shellCommand = "docker-machine env $Machine --shell powershell"
     Write-Verbose "Executing: $shellCommand | Invoke-Expression"
