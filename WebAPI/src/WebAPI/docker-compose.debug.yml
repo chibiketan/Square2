@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  ketan.funeco.web:
+    image: ketan/funeco.web:Debug
+    build:
+      context: .
+      dockerfile: Dockerfile.debug
+    environment:
+      - REMOTE_DEBUGGING=${REMOTE_DEBUGGING}
+    ports:
+      - "9090:80"
+# Ne marche pas si on laisse cette ligne...
+#    volumes:
+#      - .:/app
