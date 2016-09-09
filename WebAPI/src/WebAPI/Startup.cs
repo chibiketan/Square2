@@ -39,15 +39,17 @@ namespace WebAPI
             loggerFactory.AddDebug();
 
             // Configure the HTTP request pipeline.
-            app.UseCookieAuthentication(new CookieAuthenticationOptions {
-                AuthenticationScheme = "Cookies",
-                LoginPath = new PathString("/api/login"),
-                AccessDeniedPath = new PathString("/api/forbidden"),
-                CookieName = "MyCookie",
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true
-            });
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions {
+            //    AuthenticationScheme = "Cookies",
+            //    LoginPath = new PathString("/api/login"),
+            //    AccessDeniedPath = new PathString("/api/forbidden"),
+            //    CookieName = "MyCookie",
+            //    AutomaticAuthenticate = true,
+            //    AutomaticChallenge = true
+            //});
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

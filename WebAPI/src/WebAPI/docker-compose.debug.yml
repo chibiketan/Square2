@@ -11,5 +11,5 @@ services:
     ports:
       - "9090:80"
 # Ne marche pas si on laisse cette ligne...
-#    volumes:
-#      - .:/app
+    volumes:
+      - ./wwwroot:/app/wwwroot
