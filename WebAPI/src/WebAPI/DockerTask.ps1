@@ -137,7 +137,7 @@ $VerbosePreference = "Continue"
 $DockerWorkingDirectory = "/app/"
 
 # Path for the launch URL to be opened
-$launchURLPath = "api/values"
+$launchURLPath = ""
 
 # The project name can only contain alphanumeric charecters, replace everything else with empty string
 $ProjectName = $ProjectName -replace "[^a-zA-Z0-9]", ""

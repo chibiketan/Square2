@@ -12,4 +12,4 @@ services:
       - "9090:80"
 # Ne marche pas si on laisse cette ligne...
     volumes:
-      - ./wwwroot:/app/wwwroot
+      - ../../../../wwwroot:/app/wwwroot
