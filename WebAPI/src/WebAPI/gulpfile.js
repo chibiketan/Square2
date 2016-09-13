@@ -24,6 +24,7 @@ gulp.task("scriptsNStyles", () => {
             '@angular/**',
             'jquery/dist/jquery.*js',
             'bootstrap/dist/js/bootstrap.*js',
+            'moment/moment.js'
     ], {
         cwd: "node_modules/**"
     })

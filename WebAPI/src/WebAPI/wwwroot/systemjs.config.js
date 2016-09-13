@@ -8,25 +8,25 @@
         'app': 'appScripts', // 'dist',
         '@angular': 'libs/@angular',
         'angular2-in-memory-web-api': 'libs/angular2-in-memory-web-api',
-        'rxjs': 'libs/rxjs'
+        'rxjs': 'npm:rxjs'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
-        'app': { main: 'main.js', defaultExtension: 'js' },
+        'app': { main: './boot.js', defaultExtension: 'js' },
         'rxjs': { defaultExtension: 'js' },
-        'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+        'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' }
     };
     var ngPackageNames = [
+      'core',
       'common',
       'compiler',
-      'core',
-      'forms',
-      'http',
       'platform-browser',
       'platform-browser-dynamic',
+      'http',
       'router',
-      'router-deprecated',
-      'upgrade',
+      'forms'
+//      'router-deprecated',
+//      'upgrade'
     ];
     // Individual files (~300 requests):
     function packIndex(pkgName) {
