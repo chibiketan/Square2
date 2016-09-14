@@ -10,6 +10,6 @@ services:
       - REMOTE_DEBUGGING=${REMOTE_DEBUGGING}
     ports:
       - "9090:80"
-# En cas de problème sous Windows : http://stackoverflow.com/questions/30040708/how-to-mount-local-volumes-in-docker-machine
+# En cas de probleme sous Windows : http://stackoverflow.com/questions/30040708/how-to-mount-local-volumes-in-docker-machine
     volumes:
       - ../../../../wwwroot:/app/wwwroot
