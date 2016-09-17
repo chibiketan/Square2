@@ -8,7 +8,7 @@
         'app': 'appScripts', // 'dist',
         '@angular': 'libs/@angular',
         'angular2-in-memory-web-api': 'libs/angular2-in-memory-web-api',
-        'rxjs': 'npm:rxjs'
+        'rxjs': 'libs/rxjs'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
