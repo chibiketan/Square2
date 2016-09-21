@@ -15,4 +15,3 @@ System.register(['@angular/platform-browser-dynamic', './app.module'], function(
         }
     }
 });
-//# sourceMappingURL=boot.js.map

@@ -4,10 +4,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent }  from './app';
 import 'rxjs/Rx';
 
+import { AuthenticationService } from './authentication.service';
+import { MenuComponent } from "./menu.component";
+
+
 @NgModule({
     imports: [BrowserModule, HttpModule],
-    declarations: [AppComponent],
+    declarations: [AppComponent, MenuComponent],
     bootstrap: [AppComponent],
-    providers: []
+    providers: [AuthenticationService]
 })
 export class AppModule { }
