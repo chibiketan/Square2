@@ -48,3 +48,14 @@ gulp.task('watch.ts', ['ts'], function () {
 });
 
 gulp.task('default', ['scriptsNStyles', 'watch']);
+
+var inlineTemplate = require('./gulp/gulp-inline-template.js');
+gulp.task('test',
+    function() {
+        var tsResult = gulp.src([
+            "scripts/*.ts"
+        ])
+        .pipe(inlineTemplate())
+        .pipe(gulp.dest('./toto'));
+        return tsResult;
+    });
