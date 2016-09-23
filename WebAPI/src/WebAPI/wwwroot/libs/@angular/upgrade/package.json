@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/upgrade@2.0.0",
-      "I:\\projets\\Github\\Square2\\WebAPI\\src\\WebAPI"
+      "D:\\Projets\\Square2\\Square2\\WebAPI\\src\\WebAPI"
     ]
   ],
   "_from": "@angular/upgrade@2.0.0",
@@ -35,7 +35,7 @@
   "_shasum": "6d2c0071e55f57ca1eff683758626d7ef6cdbee0",
   "_shrinkwrap": null,
   "_spec": "@angular/upgrade@2.0.0",
-  "_where": "I:\\projets\\Github\\Square2\\WebAPI\\src\\WebAPI",
+  "_where": "D:\\Projets\\Square2\\Square2\\WebAPI\\src\\WebAPI",
   "author": {
     "name": "angular"
   },

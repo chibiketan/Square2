@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/router@3.0.0",
-      "I:\\projets\\Github\\Square2\\WebAPI\\src\\WebAPI"
+      "D:\\Projets\\Square2\\Square2\\WebAPI\\src\\WebAPI"
     ]
   ],
   "_from": "@angular/router@3.0.0",
@@ -35,7 +35,7 @@
   "_shasum": "cdf91b3a5d85ad39aff4fd882455c9b8c3129cd9",
   "_shrinkwrap": null,
   "_spec": "@angular/router@3.0.0",
-  "_where": "I:\\projets\\Github\\Square2\\WebAPI\\src\\WebAPI",
+  "_where": "D:\\Projets\\Square2\\Square2\\WebAPI\\src\\WebAPI",
   "author": {
     "name": "angular"
   },

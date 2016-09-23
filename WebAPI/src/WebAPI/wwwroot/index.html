@@ -2,7 +2,9 @@
 <head>
     <title>Angular 2 QuickStart</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
 
     <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->
@@ -26,6 +28,14 @@
 </head>
 <!-- 3. Display the application -->
 <body>
-    <my-app>Loading...</my-app>
+<my-app>
+    <div class="container">
+        <h2>Loading...</h2>
+    </div>
+</my-app>
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="libs/jquery/dist/jquery.min.js" ></script>
+    <script src="libs/tether/dist/js/tether.min.js" ></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js" ></script>
 </body>
 </html>
