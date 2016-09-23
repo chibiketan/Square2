@@ -7,6 +7,9 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 var gulp = require('gulp');
 var clean = require('gulp-clean');
 var ts = require('gulp-typescript');
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+
 
 var destPath = './wwwroot/libs/';
 // Delete the dist directory
@@ -52,5 +55,13 @@ gulp.task('watch.ts', ['ts'], function () {
     return gulp.watch('scripts/*.ts', ['ts']);
 });
 
-gulp.task('default', ['scriptsNStyles', 'watch']);
+gulp.task('sass', function () {
+    return gulp.src('./sass/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(destPath));
+});
+
+gulp.task('default', ['scriptsNStyles', "sass", 'watch']);
 
