@@ -29,7 +29,7 @@ System.register(["@angular/core", "./authentication.service"], function(exports_
                 MenuComponent = __decorate([
                     core_1.Component({
                         selector: "menu",
-                        templateUrl: "views/menu.html"
+                        template: "<nav>\n    <div> un menu</div>\n</nav>"
                     }), 
                     __metadata('design:paramtypes', [authentication_service_1.AuthenticationService])
                 ], MenuComponent);

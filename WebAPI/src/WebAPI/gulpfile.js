@@ -32,11 +32,13 @@ gulp.task("scriptsNStyles", () => {
 });
 
 var tsProject = ts.createProject('scripts/tsconfig.json');
+var inlineTemplate = require('./gulp/gulp-inline-template.js');
 gulp.task('ts', function (done) {
     //var tsResult = tsProject.src()
     var tsResult = gulp.src([
             "scripts/*.ts"
     ])
+        .pipe(inlineTemplate("./wwwroot/"))
         .pipe(ts(tsProject), undefined, ts.reporter.fullReporter());
     return tsResult.js.pipe(gulp.dest('./wwwroot/appScripts'));
 });
@@ -49,13 +51,3 @@ gulp.task('watch.ts', ['ts'], function () {
 
 gulp.task('default', ['scriptsNStyles', 'watch']);
 
-var inlineTemplate = require('./gulp/gulp-inline-template.js');
-gulp.task('test',
-    function() {
-        var tsResult = gulp.src([
-            "scripts/*.ts"
-        ])
-        .pipe(inlineTemplate())
-        .pipe(gulp.dest('./toto'));
-        return tsResult;
-    });
