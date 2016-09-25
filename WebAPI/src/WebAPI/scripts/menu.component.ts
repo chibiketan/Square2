@@ -2,7 +2,7 @@
 import { AuthenticationService } from "./authentication.service"
 
 @Component({
-    selector: "menu",
+    selector: "funeco-menu",
     templateUrl: "views/menu.html"
 })
 export class MenuComponent {
