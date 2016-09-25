@@ -5,6 +5,7 @@ import { AppComponent }  from './app';
 import 'rxjs/Rx';
 
 import { AuthenticationService } from './authentication.service';
+import { AuthenticationProxy } from './authentication.proxy';
 import { MenuComponent } from "./menu.component";
 
 
@@ -12,6 +13,6 @@ import { MenuComponent } from "./menu.component";
     imports: [BrowserModule, HttpModule],
     declarations: [AppComponent, MenuComponent],
     bootstrap: [AppComponent],
-    providers: [AuthenticationService]
+    providers: [AuthenticationService, AuthenticationProxy]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/platform-browser', '@angular/http', './app', 'rxjs/Rx', './authentication.service', "./menu.component"], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/platform-browser', '@angular/http', './app', 'rxjs/Rx', './authentication.service', './authentication.proxy', "./menu.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/platform-browser', '@angular/http', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, platform_browser_1, http_1, app_1, authentication_service_1, menu_component_1;
+    var core_1, platform_browser_1, http_1, app_1, authentication_service_1, authentication_proxy_1, menu_component_1;
     var AppModule;
     return {
         setters:[
@@ -30,6 +30,9 @@ System.register(['@angular/core', '@angular/platform-browser', '@angular/http', 
             function (authentication_service_1_1) {
                 authentication_service_1 = authentication_service_1_1;
             },
+            function (authentication_proxy_1_1) {
+                authentication_proxy_1 = authentication_proxy_1_1;
+            },
             function (menu_component_1_1) {
                 menu_component_1 = menu_component_1_1;
             }],
@@ -42,7 +45,7 @@ System.register(['@angular/core', '@angular/platform-browser', '@angular/http', 
                         imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
                         declarations: [app_1.AppComponent, menu_component_1.MenuComponent],
                         bootstrap: [app_1.AppComponent],
-                        providers: [authentication_service_1.AuthenticationService]
+                        providers: [authentication_service_1.AuthenticationService, authentication_proxy_1.AuthenticationProxy]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppModule);
