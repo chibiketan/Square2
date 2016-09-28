@@ -46,7 +46,7 @@ var inlineTemplate = require('./gulp/gulp-inline-template.js');
 gulp.task('ts', function (done) {
     //var tsResult = tsProject.src()
     var tsResult = gulp.src([
-            "scripts/*.ts"
+            "scripts/**/*.ts"
     ])
         .pipe(inlineTemplate("./wwwroot/"))
         .pipe(ts(tsProject), undefined, ts.reporter.fullReporter());
