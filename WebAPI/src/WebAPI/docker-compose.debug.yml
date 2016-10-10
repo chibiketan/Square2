@@ -12,12 +12,12 @@ services:
       - "9090:80"
 # En cas de probleme sous Windows : http://stackoverflow.com/questions/30040708/how-to-mount-local-volumes-in-docker-machine
     volumes:
-      - ../../../../wwwroot:/app/wwwroot
+      - ${PROJECT_FOLDER}/wwwroot:/app/wwwroot
 
   ketan.ldap:
     image: ketan/ldap:Debug
     build:
-      context: ../../../docker-images/ldap
+      context: ${PROJECT_FOLDER}/../../../docker-images/ldap
       dockerfile: Dockerfile
     environment:
       - LDAP_DOMAIN=funeco.com

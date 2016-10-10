@@ -463,6 +463,8 @@ else {
     $env:REMOTE_DEBUGGING = 0
 }
 
+$env:PROJECT_FOLDER = $ProjectFolder
+
 # Call the correct functions for the parameters that were used
 if ($Clean) {
     Clean
