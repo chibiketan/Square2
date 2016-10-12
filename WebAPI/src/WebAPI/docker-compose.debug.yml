@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile.debug
     environment:
       - REMOTE_DEBUGGING=${REMOTE_DEBUGGING}
+      - LDAP_ROOTPASS=MyRoot
+      - LDAP_FQN_DOMAIN=dc=funeco,dc=com
     ports:
       - "9090:80"
 # En cas de probleme sous Windows : http://stackoverflow.com/questions/30040708/how-to-mount-local-volumes-in-docker-machine
@@ -15,13 +17,15 @@ services:
       - ${PROJECT_FOLDER}/wwwroot:/app/wwwroot
 
   ketan.ldap:
-    image: ketan/ldap:Debug
-    build:
-      context: ${PROJECT_FOLDER}/../../../docker-images/ldap
-      dockerfile: Dockerfile
+#    image: ketan/ldap:Debug
+    image: nickstenning/slapd
+#    build:
+#      context: ${PROJECT_FOLDER}/../../../docker-images/ldap
+#      dockerfile: Dockerfile
     environment:
       - LDAP_DOMAIN=funeco.com
       - LDAP_ORGANISATION="Marbrerie Funeraire"
       - LDAP_ROOTPASS=MyRoot
     volumes:
-      - ./ldap:/var/lib/ldap
+      - ./docker/ldap:/var/lib/ldap
+      - ./shared:/mnt/shared
