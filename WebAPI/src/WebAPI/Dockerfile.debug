@@ -12,7 +12,8 @@ RUN curl -SL https://raw.githubusercontent.com/Microsoft/MIEngine/getclrdbg-rele
     && rm GetClrDbg.sh \
     && apt-get update \
     && apt-get install -y ldap-utils \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && chmod +x /mnt/ldif/init-ldap.sh
 
 # Set the Working Directory
 WORKDIR /app

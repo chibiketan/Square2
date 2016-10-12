@@ -12,9 +12,13 @@ services:
       - LDAP_FQN_DOMAIN=dc=funeco,dc=com
     ports:
       - "9090:80"
+    networks:
+      - ldap
 # En cas de probleme sous Windows : http://stackoverflow.com/questions/30040708/how-to-mount-local-volumes-in-docker-machine
     volumes:
       - ${PROJECT_FOLDER}/wwwroot:/app/wwwroot
+    depends_on:
+      - ketan.ldap
 
   ketan.ldap:
 #    image: ketan/ldap:Debug
@@ -26,6 +30,11 @@ services:
       - LDAP_DOMAIN=funeco.com
       - LDAP_ORGANISATION="Marbrerie Funeraire"
       - LDAP_ROOTPASS=MyRoot
+    networks:
+      - ldap
     volumes:
       - ./docker/ldap:/var/lib/ldap
-      - ./shared:/mnt/shared
+      - ./docker/shared:/mnt/shared
+
+networks:
+  ldap:
