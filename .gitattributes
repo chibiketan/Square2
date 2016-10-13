@@ -1,0 +1,2 @@
+# eviter la conversion de git vers CRLF
+*.sh -crlf
