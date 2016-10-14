@@ -18,9 +18,9 @@ services:
     volumes:
       - ${PROJECT_FOLDER}/wwwroot:/app/wwwroot
     depends_on:
-      - ketan.ldap
+      - ketan_ldap
 
-  ketan.ldap:
+  ketan_ldap:
 #    image: ketan/ldap:Debug
     image: nickstenning/slapd
 #    build:
