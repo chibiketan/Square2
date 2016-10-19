@@ -17,6 +17,7 @@ services:
 # En cas de probleme sous Windows : http://stackoverflow.com/questions/30040708/how-to-mount-local-volumes-in-docker-machine
     volumes:
       - ${PROJECT_FOLDER}/wwwroot:/app/wwwroot
+      - ./docker/shared:/mnt/shared
     depends_on:
       - ketan_ldap
 
