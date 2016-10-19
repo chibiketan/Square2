@@ -22,19 +22,20 @@ services:
 
   ketan_ldap:
 #    image: ketan/ldap:Debug
-    image: nickstenning/slapd
+    image: osixia/openldap:1.1.6
 #    build:
 #      context: ${PROJECT_FOLDER}/../../../docker-images/ldap
 #      dockerfile: Dockerfile
     environment:
       - LDAP_DOMAIN=funeco.com
       - LDAP_ORGANISATION="Marbrerie Funeraire"
-      - LDAP_ROOTPASS=MyRoot
+      - LDAP_ADMIN_PASSWORD=MyRoot
     networks:
       - ldap
     volumes:
       - ./docker/ldap:/var/lib/ldap
       - ./docker/shared:/mnt/shared
+      - ./docker/slapd/config:/etc/ldap/slapd.d
 
 networks:
   ldap:
