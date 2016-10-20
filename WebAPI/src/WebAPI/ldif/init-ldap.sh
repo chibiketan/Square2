@@ -18,7 +18,7 @@ if [ ! -e /mnt/shared/ketan_ldap_bootstrapped ]; then
   until [ $n -ge 6 ]
   do
 	echo "[${n}/5]Tentative de connexion au LDAP"
-    ldapsearch -H ldap://${LDAP_DOMAIN} -D cn=admin,$LDAP_FQN_DOMAIN -w $LDAP_ROOTPASS && break  # tentative de connexion au ldap
+    ldapsearch -H ldap://${LDAP_DOMAIN} -D cn=admin,${LDAP_FQN_DOMAIN} -w ${LDAP_ROOTPASS} -b ${LDAP_FQN_DOMAIN} && break  # tentative de connexion au ldap
     n=$[$n+1]
 	if [ $n -eq 6 ]; then
 	  echo "Impossible de se connecter au LDAP sur le domaine ${LDAP_DOMAIN}"
@@ -28,7 +28,7 @@ if [ ! -e /mnt/shared/ketan_ldap_bootstrapped ]; then
   done
   
   echo "Initialisation des objets dans le LDAP"
-  ldapadd -v -H ldap://${LDAP_DOMAIN} -c -x -D cn=admin,$LDAP_FQN_DOMAIN -w $LDAP_ROOTPASS -f /mnt/ldif/user.ldif \
+  ldapadd -v -H ldap://${LDAP_DOMAIN} -c -x -D cn=admin,${LDAP_FQN_DOMAIN} -w ${LDAP_ROOTPASS} -f /mnt/ldif/user.ldif \
   && touch /mnt/shared/ketan_ldap_bootstrapped
 else
   status "Elements deja crees"
