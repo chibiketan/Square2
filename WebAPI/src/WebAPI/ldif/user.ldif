@@ -1,0 +1,50 @@
+# Ajout de l'organisation unit People
+dn: ou=People,dc=funeco,dc=com
+changetype: add
+objectclass: top
+objectclass: organizationalUnit
+ou: People
+#ou: Marketing
+
+# Ajout de l'organisation unit Groups
+dn: ou=Groups,dc=funeco,dc=com
+changetype: add
+objectclass: top
+objectclass: organizationalUnit
+ou: Groups
+
+# Ajout des groupes : Administrators, Sellers, Users
+dn: cn=Administrators,ou=Groups,dc=funeco,dc=com
+changetype: add
+objectclass: top
+objectclass: groupOfNames
+#member: cn=Sue Jacobs,ou=People,dc=example,dc=com
+cn: Administrators
+
+dn: cn=Sellers,ou=Groups,dc=funeco,dc=com
+changetype: add
+objectclass: top
+objectclass: groupOfNames
+cn: Sellers
+
+dn: cn=Users,ou=Groups,dc=funeco,dc=com
+changetype: add
+objectclass: top
+objectclass: groupOfNames
+cn: Users
+
+# Ajout de l'utilisateur par défaut
+dn: cn=test,ou=People,dc=funeco,dc=com
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: test
+givenName: test
+#sn: test
+#ou: People
+#ou: Marketing
+uid: test
+userPassword: test
+
