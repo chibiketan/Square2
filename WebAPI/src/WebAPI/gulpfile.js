@@ -42,15 +42,32 @@ gulp.task("scriptsNStyles", () => {
 });
 
 var tsProject = ts.createProject('scripts/tsconfig.json');
+var sourcemaps = require('gulp-sourcemaps');
 var inlineTemplate = require('./gulp/gulp-inline-template.js');
 gulp.task('ts', function (done) {
     //var tsResult = tsProject.src()
     var tsResult = gulp.src([
             "scripts/**/*.ts"
     ])
+        .pipe(sourcemaps.init())
         .pipe(inlineTemplate("./wwwroot/"))
         .pipe(tsProject(), undefined, ts.reporter.fullReporter());
-    return tsResult.js.pipe(gulp.dest('./wwwroot/appScripts'));
+    return tsResult.js
+        .pipe(sourcemaps.write("maps/"))
+        .pipe(gulp.dest('./wwwroot/appScripts'));
+
+    var tsResult = tsProject
+        .src()
+        .pipe(sourcemaps.init())
+        .pipe(ts(tsProject)).js
+        .pipe(sourcemaps.write("."))
+        .pipe(gulp.dest("js"));
+
+    tsProject.src()
+        .pipe(sourcemaps.init())
+        .pipe(ts(tsProject)).js
+        .pipe(sourcemaps.write({ sourceRoot: "/js" }))
+        .pipe(gulp.dest("js"));
 });
 
 gulp.task('watch', ['watch.ts']);
