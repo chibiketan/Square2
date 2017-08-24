@@ -23,3 +23,4 @@ AuthenticationService = __decorate([
     __metadata("design:paramtypes", [authentication_proxy_1.AuthenticationProxy])
 ], AuthenticationService);
 exports.AuthenticationService = AuthenticationService;
+//# sourceMappingURL=authentication.service.js.map

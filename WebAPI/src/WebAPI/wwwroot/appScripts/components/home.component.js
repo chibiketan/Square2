@@ -14,7 +14,8 @@ var HomeComponent = (function () {
 }());
 HomeComponent = __decorate([
     core_1.Component({
-        template: "ceci est la home page"
+        templateUrl: "views/home.html"
     })
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
+//# sourceMappingURL=home.component.js.map

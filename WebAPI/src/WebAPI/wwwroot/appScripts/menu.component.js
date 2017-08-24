@@ -21,8 +21,9 @@ var MenuComponent = (function () {
 MenuComponent = __decorate([
     core_1.Component({
         selector: "funeco-menu",
-        template: "<nav class=\"nav nav-stacked funeco-menu\">\n    <div class=\"bg-info nav-item funeco-menu-category\"> un menu</div>\n    <a class=\"nav-link nav-item active funeco-menu-element\" [routerLink]=\"['/home']\">Home</a>\n    <a class=\"nav-link nav-item funeco-menu-element\" [routerLink]=\"['/login']\">Login</a>\n    <div class=\"bg-info nav-item funeco-menu-category\"> un second menu</div>\n    <a class=\"nav-link nav-item funeco-menu-element\" href=\"#\">3 lien</a>\n</nav>"
+        templateUrl: "views/menu.html"
     }),
     __metadata("design:paramtypes", [authentication_service_1.AuthenticationService])
 ], MenuComponent);
 exports.MenuComponent = MenuComponent;
+//# sourceMappingURL=menu.component.js.map

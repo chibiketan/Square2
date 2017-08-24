@@ -15,7 +15,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "<div class=\"navbar navbar-static-top navbar-dark bg-inverse\">\n    COUCOU\n</div>\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-xs-2\">\n            <funeco-menu></funeco-menu>\n        </div>\n        <div class=\"col-xs-10\">\n            <!-- Routed views go here -->\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>"
+        templateUrl: 'views/app.html'
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
+//# sourceMappingURL=app.js.map

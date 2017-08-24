@@ -6,3 +6,4 @@ var AuthenticateResponse = (function () {
     return AuthenticateResponse;
 }());
 exports.AuthenticateResponse = AuthenticateResponse;
+//# sourceMappingURL=authenticate-response.js.map

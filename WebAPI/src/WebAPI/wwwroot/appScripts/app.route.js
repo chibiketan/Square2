@@ -20,3 +20,4 @@ var routes = [
 ];
 exports.AppRoutingProviders = [];
 exports.AppRouting = router_1.RouterModule.forRoot(routes);
+//# sourceMappingURL=app.route.js.map

@@ -28,3 +28,4 @@ AuthenticationProxy = __decorate([
     __metadata("design:paramtypes", [])
 ], AuthenticationProxy);
 exports.AuthenticationProxy = AuthenticationProxy;
+//# sourceMappingURL=authentication.proxy.js.map

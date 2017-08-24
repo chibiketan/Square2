@@ -8,3 +8,4 @@ var AuthenticateRequest = (function () {
     return AuthenticateRequest;
 }());
 exports.AuthenticateRequest = AuthenticateRequest;
+//# sourceMappingURL=authenticate-request.js.map
