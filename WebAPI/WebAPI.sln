@@ -1,16 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD0F09A6-30F9-43DD-8B60-E5B680AEC843}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C326054A-4E61-4570-AF35-45D36EB92FEC}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebAPI", "src\WebAPI\WebAPI.xproj", "{9848C4C9-9C8F-42C4-BA95-2355FFAB7A96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "src\WebAPI\WebAPI.csproj", "{9848C4C9-9C8F-42C4-BA95-2355FFAB7A96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,5 +25,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9848C4C9-9C8F-42C4-BA95-2355FFAB7A96} = {AD0F09A6-30F9-43DD-8B60-E5B680AEC843}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B980E8D-A3E1-49BB-BAF0-95DE3EFA2601}
 	EndGlobalSection
 EndGlobal
