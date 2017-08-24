@@ -1,10 +1,9 @@
-System.register(["@angular/router", "./components/home.component", "./components/login.component"], function(exports_1, context_1) {
+System.register(["@angular/router", "./components/home.component", "./components/login.component"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, home_component_1, login_component_1;
-    var routes, AppRoutingProviders, AppRouting;
+    var router_1, home_component_1, login_component_1, routes, AppRoutingProviders, AppRouting;
     return {
-        setters:[
+        setters: [
             function (router_1_1) {
                 router_1 = router_1_1;
             },
@@ -13,8 +12,9 @@ System.register(["@angular/router", "./components/home.component", "./components
             },
             function (login_component_1_1) {
                 login_component_1 = login_component_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             routes = [
                 {
                     path: '',
@@ -33,5 +33,6 @@ System.register(["@angular/router", "./components/home.component", "./components
             exports_1("AppRoutingProviders", AppRoutingProviders = []);
             exports_1("AppRouting", AppRouting = router_1.RouterModule.forRoot(routes));
         }
-    }
+    };
 });
+//# sourceMappingURL=app.route.js.map

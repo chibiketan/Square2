@@ -1,6 +1,7 @@
+"use strict";
 // Reflect.metadata ( metadataKey, metadataValue )
 // - https://github.com/jonathandturner/decorators/blob/master/specs/metadata.md#reflectmetadata--metadatakey-metadatavalue-
-"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require("../../Reflect");
 var assert = require("assert");
 function ReflectMetadataReturnsDecoratorFunction() {

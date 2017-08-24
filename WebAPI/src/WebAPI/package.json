@@ -1,10 +1,6 @@
 {
   "version": "1.0.0",
   "name": "ketan.funeco.web",
-  "scripts": {
-    "postinstall": "typings install",
-    "typings": "typings"
-  },
   "private": true,
   "dependencies": {
     "@angular/common": "2.0.0",

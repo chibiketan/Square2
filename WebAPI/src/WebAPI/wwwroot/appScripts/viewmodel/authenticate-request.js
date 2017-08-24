@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var AuthenticateRequest;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             AuthenticateRequest = (function () {
                 function AuthenticateRequest(login, password) {
                     this.login = login;
@@ -14,5 +14,6 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("AuthenticateRequest", AuthenticateRequest);
         }
-    }
+    };
 });
+//# sourceMappingURL=authenticate-request.js.map

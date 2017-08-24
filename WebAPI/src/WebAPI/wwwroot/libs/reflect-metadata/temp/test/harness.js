@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function runTests(fixture) {
     var results = { passed: [], failed: [] };
     for (var testName in fixture) {

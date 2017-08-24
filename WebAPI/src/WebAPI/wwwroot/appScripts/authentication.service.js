@@ -1,6 +1,5 @@
-System.register(["@angular/core", "./authentication.proxy"], function(exports_1, context_1) {
+System.register(["@angular/core", "./authentication.proxy"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,29 +9,31 @@ System.register(["@angular/core", "./authentication.proxy"], function(exports_1,
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, authentication_proxy_1;
-    var AuthenticationService;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, authentication_proxy_1, AuthenticationService;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (authentication_proxy_1_1) {
                 authentication_proxy_1 = authentication_proxy_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             AuthenticationService = (function () {
                 function AuthenticationService(autenticationProxy) {
                     this.autenticationProxy = autenticationProxy;
                     console.debug("Construction d'un objet AuthenticationService");
                 }
-                AuthenticationService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [authentication_proxy_1.AuthenticationProxy])
-                ], AuthenticationService);
                 return AuthenticationService;
             }());
+            AuthenticationService = __decorate([
+                core_1.Injectable(),
+                __metadata("design:paramtypes", [authentication_proxy_1.AuthenticationProxy])
+            ], AuthenticationService);
             exports_1("AuthenticationService", AuthenticationService);
         }
-    }
+    };
 });
+//# sourceMappingURL=authentication.service.js.map

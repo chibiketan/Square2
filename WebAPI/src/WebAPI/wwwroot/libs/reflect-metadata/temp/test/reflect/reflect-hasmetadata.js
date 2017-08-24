@@ -1,6 +1,7 @@
+"use strict";
 // Reflect.hasMetadata ( metadataKey, target [, propertyKey] )
 // - https://github.com/jonathandturner/decorators/blob/master/specs/metadata.md#reflecthasmetadata--metadatakey-target--propertykey-
-"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require("../../Reflect");
 var assert = require("assert");
 function ReflectHasMetadataInvalidTarget() {
