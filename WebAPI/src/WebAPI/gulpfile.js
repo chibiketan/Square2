@@ -49,7 +49,7 @@ gulp.task('ts', function (done) {
             "scripts/**/*.ts"
     ])
         .pipe(inlineTemplate("./wwwroot/"))
-        .pipe(ts(tsProject), undefined, ts.reporter.fullReporter());
+        .pipe(tsProject(), undefined, ts.reporter.fullReporter());
     return tsResult.js.pipe(gulp.dest('./wwwroot/appScripts'));
 });
 
