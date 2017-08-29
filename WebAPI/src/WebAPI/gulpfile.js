@@ -9,6 +9,20 @@ var clean = require('gulp-clean');
 var ts = require('gulp-typescript');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var gutil = require('gulp-util');
+
+function visualStudioReporter() {
+    return {
+        error: function (error) {
+            //This works
+            gutil.log("Typescript: error", error.message);
+            //This isn't shown
+            console.error(error.message);
+        },
+        finish: ts.reporter.defaultReporter().finish
+    };
+}
+
 
 
 var destPath = './wwwroot/libs/';
@@ -43,6 +57,7 @@ gulp.task("scriptsNStyles", () => {
 
 var tsProject = ts.createProject('scripts/tsconfig.json');
 var sourcemaps = require('gulp-sourcemaps');
+var debug = require("gulp-debug");
 var inlineTemplate = require('./gulp/gulp-inline-template.js');
 gulp.task('ts', function (done) {
     //var tsResult = tsProject.src()
@@ -52,8 +67,9 @@ gulp.task('ts', function (done) {
         .pipe(sourcemaps.init())
         .pipe(inlineTemplate("./wwwroot/"))
         .pipe(tsProject(), undefined, ts.reporter.fullReporter());
+    tsResult.dts.pipe(gulp.dest('./wwwroot/appScripts'));
     return tsResult.js
-        .pipe(sourcemaps.write("maps/"))
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('./wwwroot/appScripts'));
 
     var tsResult = tsProject
