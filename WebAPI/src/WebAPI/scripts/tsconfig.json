@@ -6,16 +6,18 @@
     //"module": "commonjs",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    "outDir": "../wwwroot/appScripts/",
+    //"outDir": "../wwwroot/appScripts/",
     "removeComments": false,
-    "sourceMap": true,
+    "sourceMap": false,
     "target": "es5",
     "moduleResolution": "node",
-    "lib": [ "es2015", "dom" ]
+    "lib": [ "es2015", "dom" ],
+    "declaration": false
   },
   "exclude": [
     "node_modules",
     "typings/index",
     "typings/index.d.ts"
-  ]
+  ],
+  "compileOnSave": false
 }

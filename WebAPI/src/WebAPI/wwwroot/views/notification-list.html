@@ -2,7 +2,7 @@
     Notifications :
     <ul>
         <li *ngFor="let notification of notifications">
-            <notification [type]="type" [text]="text" (onClose)="onNotificationClose(notification)"></notification>
+            <notification [type]="notification.type" [text]="notification.text" (onClose)="onNotificationClose(notification)"></notification>
         </li>
     </ul>
 </div>

@@ -3,6 +3,7 @@
 
 # project specific files
 WebAPI/src/WebAPI/wwwroot/appScripts/
+WebAPI/src/WebAPI/scripts/**/*.js
 
 
 # User-specific files
