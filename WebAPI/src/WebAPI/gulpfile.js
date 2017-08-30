@@ -60,37 +60,24 @@ var sourcemaps = require('gulp-sourcemaps');
 var debug = require("gulp-debug");
 var merge = require('merge2');
 var inlineTemplate = require('./gulp/gulp-inline-template.js');
-gulp.task('ts', function (done) {
-    //var tsResult = tsProject.src()
-    var tsResult = gulp.src([
-            "scripts/**/*.ts"
-    ])
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        //.pipe(sourcemaps.identityMap())
-        .pipe(inlineTemplate("./wwwroot/"))
-        .pipe(tsProject(ts.reporter.fullReporter()));
+gulp.task('ts',
+    function(done) {
+        //var tsResult = tsProject.src()
+        var tsResult = gulp.src([
+                "scripts/**/*.ts"
+            ])
+            .pipe(sourcemaps.init({ loadMaps: true }))
+            //.pipe(sourcemaps.identityMap())
+            .pipe(inlineTemplate("./wwwroot/"));
 
-    return tsResult
-        .pipe(sourcemaps.write(".", { addComment: true, includeContent: false }))
-        .pipe(gulp.dest('./wwwroot/appScripts'));
+        return merge([
+            tsResult.pipe(gulp.dest('./wwwroot/appScripts/debug'))
+            .pipe(tsProject(ts.reporter.fullReporter()))
+                .pipe(sourcemaps.write(".", { addComment: true, includeContent: false, sourceRoot: './debug/' }))
+            .pipe(gulp.dest('./wwwroot/appScripts'))
+        ]);
 
-    return tsResult.js
-        .pipe(sourcemaps.write(".", { addComment: true}))
-        .pipe(gulp.dest('./wwwroot/appScripts'));
-
-    var tsResult = tsProject
-        .src()
-        .pipe(sourcemaps.init())
-        .pipe(ts(tsProject)).js
-        .pipe(sourcemaps.write("."))
-        .pipe(gulp.dest("js"));
-
-    tsProject.src()
-        .pipe(sourcemaps.init())
-        .pipe(ts(tsProject)).js
-        .pipe(sourcemaps.write({ sourceRoot: "/js" }))
-        .pipe(gulp.dest("js"));
-});
+    });
 
 gulp.task('watch', ['watch.ts']);
 

@@ -19,5 +19,5 @@
     "typings/index",
     "typings/index.d.ts"
   ],
-  "compileOnSave": false
+  "compileOnSave": true
 }
