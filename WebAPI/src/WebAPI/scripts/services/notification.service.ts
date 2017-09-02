@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class NotificationService {
-    private addEvent: Subject<NotificationEmit> = new Subject();
+    private addEvent: Subject<NotificationEmit> = new Subject<NotificationEmit>();
 
     addEvent$ = this.addEvent.asObservable();
 

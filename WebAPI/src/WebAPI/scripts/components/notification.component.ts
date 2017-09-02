@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NotificationService, NotificationType, NotificationEmit } from '../services/notification.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable, Scheduler } from 'rxjs/Rx';
@@ -9,13 +9,14 @@ import { Observable, Scheduler } from 'rxjs/Rx';
 })
 export class NotificationComponent implements OnInit, OnDestroy {
     private _observableNotification: Subscription;
+    private _observ: Observable<number>;
 
     @Input() type: NotificationType;
 
     @Input() text: string;
 
-    @Input()
-    onClose: ()=>void;
+    @Output()
+    onClose = new EventEmitter<any>();
 
     notifications: NotificationEmit[];
 
@@ -25,9 +26,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
-        let observ = Observable.timer(10000, null, Scheduler.animationFrame);
+        this._observ = Observable.timer(3000);
         // TODO
-        this._observableNotification = observ.subscribe(t => this.onClose());
+        this._observableNotification = this._observ.subscribe(t => this.onClose.emit(null));
     }
 
     ngOnDestroy(): void {
