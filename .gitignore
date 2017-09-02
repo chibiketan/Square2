@@ -3,6 +3,7 @@
 
 # project specific files
 WebAPI/src/WebAPI/wwwroot/appScripts/
+WebAPI/src/WebAPI/wwwroot/libs/
 WebAPI/src/WebAPI/scripts/**/*.js
 WebAPI/src/WebAPI/scripts/**/*.map
 

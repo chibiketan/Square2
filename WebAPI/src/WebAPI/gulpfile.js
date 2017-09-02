@@ -1,4 +1,4 @@
-/// <binding AfterBuild='ts' />
+/// <binding AfterBuild='ts, scriptsNStyles, sass' />
 /*
 This file in the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
@@ -39,7 +39,7 @@ gulp.task("scriptsNStyles", () => {
             'reflect-metadata/**',
             'rxjs/**/*.js',
             'rxjs/**/*.js.map',
-//            'rxjs/**/*.ts',
+            'rxjs/**/*.ts',
             'zone.js/dist/**',
             '@angular/**/*.js',
             '@angular/**/*.map',
