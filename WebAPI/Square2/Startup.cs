@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Square2
 {
@@ -22,6 +23,15 @@ namespace Square2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // configure swagger
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("help", new Info
+                {
+                    Title = "Square2 Help",
+                    Version = "v1"
+                });
+            });
             services.AddMvc();
         }
 
@@ -41,6 +51,12 @@ namespace Square2
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint(
+                    "/swagger/help/swagger.json", "Square2 Help Endpoint");
+            });
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
