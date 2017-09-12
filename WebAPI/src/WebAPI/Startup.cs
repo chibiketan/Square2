@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebAPI
 {
@@ -28,6 +29,14 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("help", new Info
+                {
+                    Title = "Square2 Help",
+                    Version = "v1"
+                });
+            });
             // Add framework services.
             services.AddMvc();
         }
@@ -48,6 +57,12 @@ namespace WebAPI
             //    AutomaticChallenge = true
             //});
 
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint(
+                    "/swagger/help/swagger.json", "Square2 Help Endpoint");
+            });
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
