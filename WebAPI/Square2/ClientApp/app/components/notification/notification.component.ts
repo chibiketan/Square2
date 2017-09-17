@@ -4,14 +4,26 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable, Scheduler } from 'rxjs/Rx';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
-@Component({
+@
+Component({
     selector: 'notification',
     templateUrl: './notification.component.html',
     styleUrls: ['./notification.component.css'],
     animations: [
         trigger("notificationState", [
-            transition("void => *", animate("100ms ease-in")),
-            transition("* => void", animate("100ms ease-out"))
+            state('show', style({
+                height: '*'
+            })),
+            state('close', style({
+                 height: 0   
+            })),
+            transition(":enter", [
+                style({height: 0}),
+                animate("0.5s")]),
+            transition("show => close", [
+                //style({ height: '*' }),
+                animate("0.5s")
+            ])
         ])
     ]
 })
@@ -37,9 +49,15 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.state = "show";
-        //this._observ = Observable.timer(3000);
+        this._observ = Observable.timer(3000);
         // TODO
-        //this._observableNotification = this._observ.subscribe(t => this.onClose.emit(null));
+        this._observableNotification = this._observ.subscribe(t => this.beginClose());
+    }
+
+    beginClose(): void {
+        this.state = 'close';
+        this._observ = Observable.timer(500);
+        this._observableNotification = this._observ.subscribe(t => this.onClose.emit(null));
     }
 
     ngOnDestroy(): void {
