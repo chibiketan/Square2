@@ -15,6 +15,7 @@ export class NotificationsListComponent implements OnInit, OnDestroy {
     }
 
     onNewNotification(notification: NotificationEmit): void {
+        notification.positionY = this.notifications.length * 30;
         this.notifications.push(notification);
     }
 

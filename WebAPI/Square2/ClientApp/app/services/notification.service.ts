@@ -13,6 +13,9 @@ export class NotificationService {
 }
 
 export class NotificationEmit {
+    positionY: number;
+    elementHeight: number;
+
     constructor(public type: NotificationType, public text: string) {
         
     }

@@ -1,5 +1,7 @@
-﻿<div [@notificationState]="state" class="notification ">
-    <div  class="alert alert-primary {{type}}" style="">
+﻿<div #notif [style.height]="hostElementHeight" [@notificationState]="state" class="notification ">
+    <div class="alert alert-primary {{type}}" [style.height]="elementHeight">
+        height : {{hostElementHeight}}<br />
+        elementHeight : {{elementHeight}}<br />
         {{text}}
     </div>
 </div>
