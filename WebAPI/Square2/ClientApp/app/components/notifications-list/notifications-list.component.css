@@ -1,0 +1,15 @@
+﻿.notification-container {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap-reverse;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    max-height: 100%;
+}
+
+
+.notification-item {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}

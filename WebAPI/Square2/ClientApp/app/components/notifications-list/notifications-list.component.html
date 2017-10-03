@@ -1,8 +1,5 @@
-﻿<div class="notifications-list">
-    Notifications :
-    <ul>
-        <li *ngFor="let notification of notifications">
-            <notification [type]="notification.type" [text]="notification.text" [positionY]="notification.positionY" [elementHeight]="notification.elementHeight" (onClose)="onNotificationClose(notification)"></notification>
-        </li>
-    </ul>
+﻿<div class="notifications-list notification-container">
+    <div *ngFor="let notification of notifications" class="alert alert-primary {{notification.type}} notification-item">
+        {{notification.text}}
+    </div>
 </div>

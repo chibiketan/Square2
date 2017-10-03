@@ -12,7 +12,6 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { LoginComponent } from './components/login/login.component';
-import { NotificationComponent } from './components/notification/notification.component';
 import { NotificationsListComponent } from './components/notifications-list/notifications-list.component';
 
 @NgModule({
@@ -23,8 +22,7 @@ import { NotificationsListComponent } from './components/notifications-list/noti
         FetchDataComponent,
         HomeComponent,
         LoginComponent,
-        NotificationsListComponent,
-        NotificationComponent
+        NotificationsListComponent
     ],
     imports: [
         CommonModule,
