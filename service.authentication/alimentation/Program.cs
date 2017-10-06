@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 
 namespace alimentation
 {
@@ -158,13 +159,13 @@ namespace alimentation
             // création des rôles
             CreateRoleCollection(db).Wait();
 
-            var collection = db.GetCollection<MongoDB.Bson.BsonDocument>("Roles");
-            var search = collection.Find(new BsonDocument()).ToCursorAsync().Result;
+            var collection = db.GetCollection<Role>("Role");
+            var search = collection.Find(r => true).ToCursor();
 
             search.MoveNext();
             foreach (var el in search.Current)
             {
-                Console.WriteLine(el.ToString());
+                Console.WriteLine(JsonConvert.SerializeObject(el));
             }
 
             Console.WriteLine("Hello World!");
