@@ -13,8 +13,8 @@ namespace alimentation
             connectionSettings.Server = new MongoServerAddress("localhost");
             var connection = new MongoDB.Driver.MongoClient(connectionSettings);
             var db = connection.GetDatabase("test");
-            var collection = db.GetCollection<MongoDB.Bson.BsonArray>("Roles");
-            var search = collection.FindSync(new JsonFilterDefinition<BsonArray>(""));
+            var collection = db.GetCollection<MongoDB.Bson.BsonDocument>("Roles");
+            var search = collection.Find(new BsonDocument()).ToCursorAsync().Result;
 
             search.MoveNext();
             foreach (var el in search.Current)
