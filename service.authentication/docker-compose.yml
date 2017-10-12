@@ -1,0 +1,14 @@
+version: '3'
+services:
+  auth_db:
+    image: mongo
+    ports:
+    - "27017:27017"
+    volumes:
+    - authdatavolume:/data/db
+    networks:
+    - n_auth
+volumes:
+  authdatavolume: {}
+networks:
+  n_auth:
