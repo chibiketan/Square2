@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MongoDB.Bson;
 
-namespace alimentation
+namespace Ketan.Square2.Service.Authentication.Model
 {
-    internal class Role
+    public class Role
     {
-        public ObjectId _id { get; set; }
+        public Guid _id { get; set; }
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
         public string CreationUser { get; set; }

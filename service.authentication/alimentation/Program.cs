@@ -1,14 +1,13 @@
 ﻿using System;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Ketan.Square2.Service.Authentication.Model;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 
-namespace alimentation
+namespace Ketan.Square2.Service.Authentication.Alimentation
 {
     class Program
     {
@@ -111,18 +110,21 @@ namespace alimentation
                 {
                     new Role
                     {
+                        _id = Guid.NewGuid(),
                         Name = "Admin",
                         CreationDate = DateTime.Now,
                         CreationUser = CREATION_USER
                     },
                     new Role
                     {
+                        _id = Guid.NewGuid(),
                         Name = "Seller",
                         CreationDate = DateTime.Now,
                         CreationUser = CREATION_USER
                     },
                     new Role
                     {
+                        _id = Guid.NewGuid(),
                         Name = "Customer",
                         CreationDate = DateTime.Now,
                         CreationUser = CREATION_USER
