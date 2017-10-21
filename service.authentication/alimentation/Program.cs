@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Ketan.Square2.Service.Authentication.Model;
@@ -12,6 +13,11 @@ namespace Ketan.Square2.Service.Authentication.Alimentation
     class Program
     {
         private static IConfigurationRoot s_configuration;
+        private const string COLLECTION_ROLE = "Role";
+        private const string COLLECTION_USER = "User";
+        private const string ROLE_ADMIN = "Admin";
+        private const string ROLE_SELLER = "Seller";
+        private const string ROLE_CUSTOMER = "Customer";
         private const string CREATION_USER = "System";
 
         private static IMongoDatabase GetMongoDatabase()
@@ -92,40 +98,39 @@ namespace Ketan.Square2.Service.Authentication.Alimentation
 
         private static async Task CreateRoleCollection(IMongoDatabase db)
         {
-            const string collectionName = "Role";
             try
             {
                 WriteCreationMessage("Creating \"Role\" collection.");
                 // On vérifie si la collection existe déjà
-                if (await CheckIfCollectionExist(db, collectionName))
+                if (await CheckIfCollectionExist(db, COLLECTION_ROLE))
                 {
                     WriteCreationStatus(CreationStatus.None);
                     return;
                 }
 
                 // on initialise la collection
-                await db.CreateCollectionAsync(collectionName);
-                var collection = db.GetCollection<Role>(collectionName);
+                await db.CreateCollectionAsync(COLLECTION_ROLE);
+                var collection = db.GetCollection<Role>(COLLECTION_ROLE);
                 var roles = new[]
                 {
                     new Role
                     {
                         _id = Guid.NewGuid(),
-                        Name = "Admin",
+                        Name = ROLE_ADMIN,
                         CreationDate = DateTime.Now,
                         CreationUser = CREATION_USER
                     },
                     new Role
                     {
                         _id = Guid.NewGuid(),
-                        Name = "Seller",
+                        Name = ROLE_SELLER,
                         CreationDate = DateTime.Now,
                         CreationUser = CREATION_USER
                     },
                     new Role
                     {
                         _id = Guid.NewGuid(),
-                        Name = "Customer",
+                        Name = ROLE_CUSTOMER,
                         CreationDate = DateTime.Now,
                         CreationUser = CREATION_USER
                     }
@@ -144,7 +149,95 @@ namespace Ketan.Square2.Service.Authentication.Alimentation
             }
         }
 
-        static void Main(string[] args)
+        private static async Task<Dictionary<string, Role>> GetAllRoles(IMongoDatabase db)
+        {
+            var result = new Dictionary<string, Role>();
+            var collection = db.GetCollection<Role>(COLLECTION_ROLE);
+            using (var search = collection.Find(r => true).ToCursor())
+            {
+
+                while (await search.MoveNextAsync())
+                {
+                    foreach (var el in search.Current)
+                    {
+                        result.Add(el.Name, el);
+                    }
+                }
+            } // !using search
+
+            return result;
+        }
+
+        private static async Task CreateUserCollection(IMongoDatabase db, Dictionary<string, Role> roleDictionary)
+        {
+            try
+            {
+                WriteCreationMessage("Creating \"User\" collection.");
+                // On vérifie si la collection existe déjà
+                if (await CheckIfCollectionExist(db, COLLECTION_USER))
+                {
+                    WriteCreationStatus(CreationStatus.None);
+                    return;
+                }
+
+                // on initialise la collection
+                await db.CreateCollectionAsync(COLLECTION_USER);
+                var collection = db.GetCollection<User>(COLLECTION_USER);
+                var users = new[]
+                {
+                    new User
+                    {
+                        _id = Guid.NewGuid(),
+                        Login = "Administrator",
+                        Password = CryptPassword("Administrator"), // TODO generate + hash password
+                        FirstName = "Nicolas",
+                        LastName = "Administrator",
+                        Role = roleDictionary[ROLE_ADMIN],
+                        CreationDate = DateTime.Now,
+                        CreationUser = CREATION_USER
+                    },
+                    new User
+                    {
+                        _id = Guid.NewGuid(),
+                        Login = "Seller",
+                        Password = CryptPassword("Seller"), // TODO generate + hash password
+                        FirstName = "Lucas",
+                        LastName = "Seller",
+                        Role = roleDictionary[ROLE_SELLER],
+                        CreationDate = DateTime.Now,
+                        CreationUser = CREATION_USER
+                    },
+                    new User
+                    {
+                        _id = Guid.NewGuid(),
+                        Login = "Customer",
+                        Password = CryptPassword("Customer"), // TODO generate + hash password
+                        FirstName = "Chris",
+                        LastName = "Customer",
+                        Role = roleDictionary[ROLE_CUSTOMER],
+                        CreationDate = DateTime.Now,
+                        CreationUser = CREATION_USER
+                    },
+                };
+                await collection.InsertManyAsync(users);
+
+                // create index
+                await collection.Indexes.CreateOneAsync(Builders<User>.IndexKeys.Ascending(u => u.Login), new CreateIndexOptions{Name = "User_Login", Unique = true});
+
+                WriteCreationStatus(CreationStatus.Ok);
+            }
+            catch (Exception e)
+            {
+                WriteCreationStatus(CreationStatus.Ko);
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                Console.WriteLine();
+            }
+        }
+
+        private static void Main(string[] args)
         {
             // set console output to utf8
             Console.OutputEncoding = Encoding.UTF8;
@@ -160,18 +253,20 @@ namespace Ketan.Square2.Service.Authentication.Alimentation
 
             // création des rôles
             CreateRoleCollection(db).Wait();
+            // récupération des rôles
+            var roleDictionary = GetAllRoles(db).Result;
 
-            var collection = db.GetCollection<Role>("Role");
-            var search = collection.Find(r => true).ToCursor();
+            // création des utilisateurs par défaut
+            CreateUserCollection(db, roleDictionary).Wait();
 
-            search.MoveNext();
-            foreach (var el in search.Current)
-            {
-                Console.WriteLine(JsonConvert.SerializeObject(el));
-            }
 
             Console.WriteLine("Hello World!");
             Console.ReadKey();
+        }
+
+        private static string CryptPassword(string password)
+        {
+            return password;
         }
     }
 
