@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Ketan.Square2.Service.Authentication.Data</AssemblyName>
+    <RootNamespace>Ketan.Square2.Service.Authentication.Data</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data.Interface\Data.Interface.csproj" />
+  </ItemGroup>
+
+</Project>
