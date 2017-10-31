@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Ketan.Square2.Service.Authentication.Model;
+using Ketan.Square2.Service.Authentication.Model.Configuration;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -20,18 +21,18 @@ namespace Ketan.Square2.Service.Authentication.Alimentation
         private const string ROLE_CUSTOMER = "Customer";
         private const string CREATION_USER = "System";
 
-        private static IMongoDatabase GetMongoDatabase()
+        private static IMongoDatabase GetMongoDatabase(DatabaseConfiguration dbConfig)
         {
-            var databaseName = s_configuration["db:name"];
+            var databaseName = dbConfig.Name;
             var connectionSettings = new MongoClientSettings()
             {
-                Server = new MongoServerAddress(s_configuration["db:host"]),
+                Server = new MongoServerAddress(dbConfig.Host),
                 ApplicationName = typeof(Program).FullName
             };
 
             // Si les identifiants sont fournis, on les utilise
-            var user = s_configuration["db:user"];
-            var pass = s_configuration["db:pass"];
+            var user = dbConfig.User;
+            var pass = dbConfig.Pass;
 
             if (!string.IsNullOrEmpty(user))
             {
@@ -248,8 +249,11 @@ namespace Ketan.Square2.Service.Authentication.Alimentation
                 .AddEnvironmentVariables()
                 .Build();
 
+            var dbConfig = new DatabaseConfiguration();
+            s_configuration.GetSection("db").Bind(dbConfig);
+
             // création du client mongodb
-            var db = GetMongoDatabase();
+            var db = GetMongoDatabase(dbConfig);
 
             // création des rôles
             CreateRoleCollection(db).Wait();
