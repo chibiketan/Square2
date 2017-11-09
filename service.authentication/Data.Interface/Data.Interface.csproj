@@ -6,4 +6,8 @@
     <RootNamespace>Ketan.Square2.Service.Authentication.Data.Interface</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
 </Project>
