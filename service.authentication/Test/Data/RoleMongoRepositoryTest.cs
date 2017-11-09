@@ -27,13 +27,13 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
         }
 
         [Fact]
-        public void Given_CallCreation_When_UserIsNull_Then_ExpectException()
+        public void Given_RoleIsNull_When_CreateIsUsed_Then_ExpectArgumentNullException()
         {
             var repository = new RoleMongoRepository(m_config);
 
             var e = Assert.Throws<ArgumentNullException>(() => repository.Create(null));
 
-            Assert.Equal("user", e.ParamName);
+            Assert.Equal("role", e.ParamName);
         }
     }
 }
