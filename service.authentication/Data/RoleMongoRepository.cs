@@ -2,13 +2,14 @@
 using Ketan.Square2.Service.Authentication.Data.Interface;
 using Ketan.Square2.Service.Authentication.Model;
 using Ketan.Square2.Service.Authentication.Model.Configuration;
+using MongoDB.Driver;
 
 namespace Ketan.Square2.Service.Authentication.Data
 {
-    public class RoleMongoRepository : BaseMongoRepository, IRoleRepository
+    public class RoleMongoRepository : BaseMongoRepository<Role>, IRoleRepository
     {
         public RoleMongoRepository(DatabaseConfiguration config)
-            : base(config)
+            : base(config, "Role")
         {
             
         }
@@ -20,6 +21,11 @@ namespace Ketan.Square2.Service.Authentication.Data
                 throw new ArgumentNullException(nameof(role));
             }
             throw new System.NotImplementedException();
+        }
+
+        protected override void OnCollectionCreated(IMongoCollection<Role> collection)
+        {
+            // Nothing to do
         }
     }
 }
