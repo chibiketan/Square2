@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Ketan.Square2.Service.Authentication.Data;
+using Ketan.Square2.Service.Authentication.Data.Interface;
 using Ketan.Square2.Service.Authentication.Model;
 using Ketan.Square2.Service.Authentication.Model.Configuration;
 using MongoDB.Driver;
@@ -88,6 +89,53 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             Assert.Equal(newRole.CreationUser, testRole.CreationUser);
             Assert.Equal(newRole.CreationDate.Ticks, testRole.CreationDate.Ticks);
         }
+
+        [Fact]
+        public async Task CreateRole_FailWhenIdAlreadyExist_async()
+        {
+            var repository = new RoleMongoRepository(m_config);
+            var newRole = new Role
+            {
+                CreationDate = DateTime.UtcNow,
+                CreationUser = "TEST",
+                Name = "Test",
+                _id = Guid.NewGuid()
+            };
+            var newRoleDup = new Role
+            {
+                CreationDate = DateTime.UtcNow,
+                CreationUser = "TEST2",
+                Name = "Test2",
+                _id = newRole._id
+            };
+
+            await repository.CreateAsync(newRole);
+            await Assert.ThrowsAsync<ObjectExistsException>(() =>repository.CreateAsync(newRoleDup));
+        }
+
+        [Fact]
+        public async Task CreateRole_FailWhenNameAlreadyExist_async()
+        {
+            var repository = new RoleMongoRepository(m_config);
+            var newRole = new Role
+            {
+                CreationDate = DateTime.UtcNow,
+                CreationUser = "TEST",
+                Name = "Test",
+                _id = Guid.NewGuid()
+            };
+            var newRoleDup = new Role
+            {
+                CreationDate = DateTime.UtcNow,
+                CreationUser = "TEST2",
+                Name = newRole.Name,
+                _id = Guid.NewGuid()
+            };
+
+            await repository.CreateAsync(newRole);
+            await Assert.ThrowsAsync<ObjectExistsException>(() =>repository.CreateAsync(newRoleDup));
+        }
+
 
         private MongoClient CreateClient()
         {
