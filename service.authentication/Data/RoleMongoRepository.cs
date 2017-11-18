@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ketan.Square2.Service.Authentication.Data.Interface;
 using Ketan.Square2.Service.Authentication.Model;
@@ -41,6 +42,11 @@ namespace Ketan.Square2.Service.Authentication.Data
 
             StripDates(role);
             await m_collection.InsertOneAsync(role);
+        }
+
+        public Task<List<Role>> GetAllRoleAsync()
+        {
+            return m_collection.AsQueryable().ToListAsync();
         }
 
         protected override void OnCollectionCreated(IMongoCollection<Role> collection)

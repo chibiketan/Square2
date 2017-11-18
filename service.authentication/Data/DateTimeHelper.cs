@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ketan.Square2.Service.Authentication.Data
 {
-    static class DateTimeHelper
+    public static class DateTimeHelper
     {
         public static DateTime StripTick(this DateTime datetime)
         {
