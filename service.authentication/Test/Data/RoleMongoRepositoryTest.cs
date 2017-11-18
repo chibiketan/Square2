@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Ketan.Square2.Service.Authentication.Data;
 using Ketan.Square2.Service.Authentication.Model;
 using Ketan.Square2.Service.Authentication.Model.Configuration;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using Xunit;
 
 namespace Ketan.Square2.Service.Authentication.Test.Data
@@ -51,28 +53,62 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
         //SujetDuTest_CasDeTest
         [Fact]
         //public void Given_RoleIsNull_When_CreateIsUsed_Then_ExpectArgumentNullException()
-        public void Role_FailWhenNullPassedToCreate()
+        public async Task CreateRole_FailWhenNullPassedToCreate_async()
         {
             var repository = new RoleMongoRepository(m_config);
 
-            var e = Assert.Throws<ArgumentNullException>(() => repository.Create(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => repository.CreateAsync(null));
 
             Assert.Equal("role", e.ParamName);
         }
 
         [Fact]
-        public void Role_SuccessWhenFilledObject()
+        public async Task CreateRole_SuccessWhenFilledObject_async()
         {
             var repository = new RoleMongoRepository(m_config);
             var newRole = new Role
             {
-                CreationDate = DateTime.Now,
+                CreationDate = DateTime.UtcNow,
                 CreationUser = "TEST",
                 Name = "Test",
                 _id = Guid.NewGuid()
             };
 
-            repository.Create(newRole);
+            await repository.CreateAsync(newRole);
+
+            // check
+            var mongoClient = CreateClient();
+            var db = mongoClient.GetDatabase(m_config.Name);
+            var collection = db.GetCollection<Role>("Role");
+
+            var testRole = await collection.AsQueryable().FirstOrDefaultAsync(r => r._id == newRole._id);
+
+            Assert.NotNull(testRole);
+            Assert.Equal(newRole.Name, testRole.Name);
+            Assert.Equal(newRole.CreationUser, testRole.CreationUser);
+            Assert.Equal(newRole.CreationDate.Ticks, testRole.CreationDate.Ticks);
+        }
+
+        private MongoClient CreateClient()
+        {
+            var databaseName = m_config.Name;
+            var connectionSettings = new MongoClientSettings()
+            {
+                Server = new MongoServerAddress(m_config.Host),
+                ApplicationName = GetType().FullName
+            };
+
+            // Si les identifiants sont fournis, on les utilise
+            var user = m_config.User;
+            var pass = m_config.Pass;
+
+            if (!string.IsNullOrEmpty(user))
+            {
+                connectionSettings.Credentials = new[] { MongoCredential.CreateCredential(databaseName, user, pass) };
+            }
+
+            // Création de la connexion
+            return new MongoClient(connectionSettings);
         }
     }
 }

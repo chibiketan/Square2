@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Ketan.Square2.Service.Authentication.Data.Interface;
 using Ketan.Square2.Service.Authentication.Model;
 using Ketan.Square2.Service.Authentication.Model.Configuration;
@@ -14,18 +15,27 @@ namespace Ketan.Square2.Service.Authentication.Data
             
         }
 
-        public void Create(Role role)
+        public Task CreateAsync(Role role)
         {
             if (null == role)
             {
                 throw new ArgumentNullException(nameof(role));
             }
-            throw new System.NotImplementedException();
+
+            StripDates(role);
+
+            return m_collection.InsertOneAsync(role);
         }
 
         protected override void OnCollectionCreated(IMongoCollection<Role> collection)
         {
             // Nothing to do
+        }
+
+        private void StripDates(Role role)
+        {
+            role.CreationDate = role.CreationDate.StripTick();
+            role.ModificationDate = role.ModificationDate.StripTick();
         }
     }
 }

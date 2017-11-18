@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Ketan.Square2.Service.Authentication.Model;
 
 namespace Ketan.Square2.Service.Authentication.Data.Interface
@@ -10,6 +11,6 @@ namespace Ketan.Square2.Service.Authentication.Data.Interface
         /// </summary>
         /// <param name="role">Le role à créer, ne doit pas être null</param>
         /// <exception cref="ArgumentNullException">Exception lancée si le paramètre <paramref name="role"/> est null</exception>
-        void Create(Role role);
+        Task CreateAsync(Role role);
     }
 }
