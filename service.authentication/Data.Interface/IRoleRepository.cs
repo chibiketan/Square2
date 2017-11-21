@@ -20,5 +20,12 @@ namespace Ketan.Square2.Service.Authentication.Data.Interface
         /// <returns>La liste des roles existants</returns>
         Task<List<Role>> GetAllRoleAsync();
 
+        /// <summary>
+        /// Récupère un rôle par nom.
+        /// </summary>
+        /// <param name="name">Nom du rôle à récupérer</param>
+        /// <returns>Le rôle s'il a été trouvé, null sinon</returns>
+        Task<Role> GetRoleByNameAsync(string name);
+
     }
 }
