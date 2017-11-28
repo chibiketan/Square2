@@ -49,6 +49,25 @@ namespace Ketan.Square2.Service.Authentication.Data
             return m_collection.AsQueryable().ToListAsync();
         }
 
+        public Task<Role> GetRoleByNameAsync(string name)
+        {
+            if (null == name)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if ("" == name)
+            {
+                throw new ArgumentException(nameof(name));
+            }
+
+            var query = from role in m_collection.AsQueryable()
+                        where role.Name == name
+                        select role;
+
+            return query.FirstOrDefaultAsync();
+        }
+
         protected override void OnCollectionCreated(IMongoCollection<Role> collection)
         {
             // Nothing to do

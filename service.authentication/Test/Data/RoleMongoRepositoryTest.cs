@@ -186,6 +186,83 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             }
         }
 
+        [Fact]
+        public async Task GetRoleByName_WithNullAsParameter_async()
+        {
+            // prepare
+            var repository = new RoleMongoRepository(m_config);
+
+            // do
+            // check
+            await Assert.ThrowsAsync<ArgumentNullException>(() => repository.GetRoleByNameAsync(null));
+        }
+
+        [Fact]
+        public async Task GetRoleByName_WithEmptyStringAsParameter_async()
+        {
+            // prepare
+            var repository = new RoleMongoRepository(m_config);
+
+            // do
+            // check
+            await Assert.ThrowsAsync<ArgumentException>(() => repository.GetRoleByNameAsync(""));
+        }
+
+        [Fact]
+        public async Task GetRoleByName_WithExistingRole_async()
+        {
+            // prepare
+            var repository = new RoleMongoRepository(m_config);
+            const string roleName = "MyRole";
+            var role = new Role
+            {
+                _id = Guid.NewGuid(),
+                CreationDate = DateTime.UtcNow.StripTick(),
+                ModificationUser = "A user",
+                Name = roleName
+            };
+            var mongoClient = CreateClient();
+            var db = mongoClient.GetDatabase(m_config.Name);
+            var collection = db.GetCollection<Role>("Role");
+
+            await collection.InsertOneAsync(role);
+
+            // do
+            var dbRole = await repository.GetRoleByNameAsync(roleName);
+
+            // check
+            Assert.NotNull(dbRole);
+            Assert.Equal(role.Name, dbRole.Name);
+            Assert.Equal(role.CreationDate, dbRole.CreationDate);
+            Assert.Equal(role.CreationUser, dbRole.CreationUser);
+            Assert.Equal(role._id, dbRole._id);
+        }
+
+        [Fact]
+        public async Task GetRoleByName_WithRoleNotExisting_async()
+        {
+            var repository = new RoleMongoRepository(m_config);
+            const string roleName = "MyRole2";
+            var role = new Role
+            {
+                _id = Guid.NewGuid(),
+                CreationDate = DateTime.UtcNow,
+                ModificationUser = "A user",
+                Name = roleName
+            };
+            var mongoClient = CreateClient();
+            var db = mongoClient.GetDatabase(m_config.Name);
+            var collection = db.GetCollection<Role>("Role");
+
+            await collection.InsertOneAsync(role);
+
+            // do
+            var dbRole = await repository.GetRoleByNameAsync("NotExistingRole");
+
+            // check
+            Assert.Null(dbRole);
+        }
+
         private MongoClient CreateClient()
         {
             var databaseName = m_config.Name;
