@@ -12,27 +12,9 @@ using Xunit;
 
 namespace Ketan.Square2.Service.Authentication.Test.Data
 {
-    public class RoleMongoRepositoryTest : IDisposable
+    public class RoleMongoRepositoryTest : BaseMongoRepositoryTest
     {
-        private static volatile int s_index;
-        private DatabaseConfiguration m_config;
-
-        public RoleMongoRepositoryTest()
-        {
-            // Création des ressources avant le test
-            m_config = new DatabaseConfiguration
-            {
-                Host = "localhost",
-                Name = "unit_test_" + s_index++
-            };
-        }
-
-        public void Dispose()
-        {
-            // Création de la connexion
-            var client = CreateClient();
-            client.DropDatabase(m_config.Name);
-        }
+        private const string COLLECTION_NAME = "Role";
 
         //SujetDuTest_CasDeTest
         [Fact]
@@ -63,7 +45,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             // check
             var mongoClient = CreateClient();
             var db = mongoClient.GetDatabase(m_config.Name);
-            var collection = db.GetCollection<Role>("Role");
+            var collection = db.GetCollection<Role>(COLLECTION_NAME);
 
             var testRole = await collection.AsQueryable().FirstOrDefaultAsync(r => r._id == newRole._id);
 
@@ -168,7 +150,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
 
             var mongoClient = CreateClient();
             var db = mongoClient.GetDatabase(m_config.Name);
-            var collection = db.GetCollection<Role>("Role");
+            var collection = db.GetCollection<Role>(COLLECTION_NAME);
 
             await collection.InsertManyAsync(newRoleList);
 
@@ -223,7 +205,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             };
             var mongoClient = CreateClient();
             var db = mongoClient.GetDatabase(m_config.Name);
-            var collection = db.GetCollection<Role>("Role");
+            var collection = db.GetCollection<Role>(COLLECTION_NAME);
 
             await collection.InsertOneAsync(role);
 
@@ -252,7 +234,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             };
             var mongoClient = CreateClient();
             var db = mongoClient.GetDatabase(m_config.Name);
-            var collection = db.GetCollection<Role>("Role");
+            var collection = db.GetCollection<Role>(COLLECTION_NAME);
 
             await collection.InsertOneAsync(role);
 
@@ -261,28 +243,6 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
 
             // check
             Assert.Null(dbRole);
-        }
-
-        private MongoClient CreateClient()
-        {
-            var databaseName = m_config.Name;
-            var connectionSettings = new MongoClientSettings()
-            {
-                Server = new MongoServerAddress(m_config.Host),
-                ApplicationName = GetType().FullName
-            };
-
-            // Si les identifiants sont fournis, on les utilise
-            var user = m_config.User;
-            var pass = m_config.Pass;
-
-            if (!string.IsNullOrEmpty(user))
-            {
-                connectionSettings.Credentials = new[] { MongoCredential.CreateCredential(databaseName, user, pass) };
-            }
-
-            // Création de la connexion
-            return new MongoClient(connectionSettings);
         }
     }
 }
