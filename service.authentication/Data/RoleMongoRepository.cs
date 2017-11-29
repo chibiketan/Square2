@@ -17,7 +17,7 @@ namespace Ketan.Square2.Service.Authentication.Data
             
         }
 
-        public async Task CreateAsync(Role role)
+        public async Task CreateRoleAsync(Role role)
         {
             if (null == role)
             {

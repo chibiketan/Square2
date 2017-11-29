@@ -41,7 +41,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
         {
             var repository = new RoleMongoRepository(m_config);
 
-            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => repository.CreateAsync(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => repository.CreateRoleAsync(null));
 
             Assert.Equal("role", e.ParamName);
         }
@@ -58,7 +58,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
                 _id = Guid.NewGuid()
             };
 
-            await repository.CreateAsync(newRole);
+            await repository.CreateRoleAsync(newRole);
 
             // check
             var mongoClient = CreateClient();
@@ -92,8 +92,8 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
                 _id = newRole._id
             };
 
-            await repository.CreateAsync(newRole);
-            await Assert.ThrowsAsync<ObjectExistsException>(() =>repository.CreateAsync(newRoleDup));
+            await repository.CreateRoleAsync(newRole);
+            await Assert.ThrowsAsync<ObjectExistsException>(() =>repository.CreateRoleAsync(newRoleDup));
         }
 
         [Fact]
@@ -115,8 +115,8 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
                 _id = Guid.NewGuid()
             };
 
-            await repository.CreateAsync(newRole);
-            await Assert.ThrowsAsync<ObjectExistsException>(() =>repository.CreateAsync(newRoleDup));
+            await repository.CreateRoleAsync(newRole);
+            await Assert.ThrowsAsync<ObjectExistsException>(() =>repository.CreateRoleAsync(newRoleDup));
         }
 
         [Fact]

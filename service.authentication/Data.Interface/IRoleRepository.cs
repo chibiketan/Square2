@@ -12,7 +12,7 @@ namespace Ketan.Square2.Service.Authentication.Data.Interface
         /// </summary>
         /// <param name="role">Le role à créer, ne doit pas être null</param>
         /// <exception cref="ArgumentNullException">Exception lancée si le paramètre <paramref name="role"/> est null</exception>
-        Task CreateAsync(Role role);
+        Task CreateRoleAsync(Role role);
 
         /// <summary>
         /// Récupère l'ensemble des roles présents dans le repository
