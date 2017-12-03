@@ -28,7 +28,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             Assert.Equal("role", e.ParamName);
         }
 
-        [Fact]
+        [Fact]  
         public async Task CreateRole_SuccessWhenFilledObject_async()
         {
             var repository = new RoleMongoRepository(m_config);

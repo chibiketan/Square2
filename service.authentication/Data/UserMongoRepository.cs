@@ -41,6 +41,21 @@ namespace Ketan.Square2.Service.Authentication.Data
             await m_collection.InsertOneAsync(user);
         }
 
+        public Task<User> GetUserByLoginAsync(string login)
+        {
+            if (null == login)
+            {
+                throw new ArgumentNullException(nameof(login));
+            }
+
+            if ("" == login)
+            {
+                throw new ArgumentException(nameof(login));
+            }
+
+            throw new NotImplementedException();
+        }
+
         protected override void OnCollectionCreated(IMongoCollection<User> collection)
         {
             // Création d'un index sur le champ Login
@@ -51,6 +66,7 @@ namespace Ketan.Square2.Service.Authentication.Data
         {
             user.CreationDate = user.CreationDate.StripTick();
             user.ModificationDate = user.ModificationDate.StripTick();
+            // mettre à jour les dates pour le rôle associé ?
         }
     }
 }
