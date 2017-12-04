@@ -150,12 +150,12 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             {
                 _id = Guid.NewGuid(),
                 Name = "MyRole",
-                CreationDate = DateTime.UtcNow,
+                CreationDate = DateTime.UtcNow.StripTick(),
                 CreationUser = "MyUser"
             };
             var newUser = new User
             {
-                CreationDate = DateTime.UtcNow,
+                CreationDate = DateTime.UtcNow.StripTick(),
                 CreationUser = "TEST",
                 Login = "Test",
                 Password = "toto",
@@ -166,7 +166,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             };
             var newUser2 = new User
             {
-                CreationDate = DateTime.UtcNow,
+                CreationDate = DateTime.UtcNow.StripTick(),
                 CreationUser = "TEST2",
                 Login = "Test2",
                 Password = "toto2",
@@ -206,12 +206,12 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             {
                 _id = Guid.NewGuid(),
                 Name = "MyRole",
-                CreationDate = DateTime.UtcNow,
+                CreationDate = DateTime.UtcNow.StripTick(),
                 CreationUser = "MyUser"
             };
             var newUser = new User
             {
-                CreationDate = DateTime.UtcNow,
+                CreationDate = DateTime.UtcNow.StripTick(),
                 CreationUser = "TEST",
                 Login = "Test",
                 Password = "toto",
@@ -222,7 +222,7 @@ namespace Ketan.Square2.Service.Authentication.Test.Data
             };
             var newUser2 = new User
             {
-                CreationDate = DateTime.UtcNow,
+                CreationDate = DateTime.UtcNow.StripTick(),
                 CreationUser = "TEST2",
                 Login = "Test2",
                 Password = "toto2",

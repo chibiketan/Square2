@@ -53,7 +53,11 @@ namespace Ketan.Square2.Service.Authentication.Data
                 throw new ArgumentException(nameof(login));
             }
 
-            throw new NotImplementedException();
+            var query = from u in m_collection.AsQueryable()
+                        where u.Login == login
+                        select u;
+
+            return query.FirstOrDefaultAsync();
         }
 
         protected override void OnCollectionCreated(IMongoCollection<User> collection)
